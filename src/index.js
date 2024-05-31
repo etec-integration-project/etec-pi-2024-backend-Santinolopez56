@@ -1,23 +1,20 @@
 import express from 'express';
-import authRutas from './rutas/authRutas.js';
+import creacionuser from './routes/creacionuser.js';
 import { config } from 'dotenv';
 import { createPool } from 'mysql2/promise';
 
-
 config();
 
-
 const app = express();
+
 
 export const pool = createPool({
     host: process.env.MYSQLDB_HOST,
     user: 'root',
-    password: process.env.MYSQLDB_ROOT_PASSWORD,
-    port: process.env.MYSQLDB_DOCKER_PORT,
-    database: process.env.MYSQLDB_DATABASE 
+    password: process.env.MYSQL_ROOT_PASSWORD,
+    port: 3306,
+    database: process.env.MYSQL_DATABASE
 });
-
-
 
 app.use(express.json());
 
@@ -37,19 +34,16 @@ const initializeDatabase = async () => {
     }
 };
 
-
-
 app.get('/', (req, res) => {
     res.send("Andando");
 });
-
 
 app.get('/ping', async (req, res) => {
     const resultado = await pool.query('SELECT NOW()');
     res.json(resultado[0]);
 });
 
-app.use('/auth', authRutas);
+app.use('/creacionuser', creacionuser);
 
 app.listen(3000, async () => {
     await initializeDatabase();

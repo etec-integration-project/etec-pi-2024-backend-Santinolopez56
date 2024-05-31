@@ -1,10 +1,10 @@
 import express from 'express';
-import { registrar, iniciarSesion, listarUsuarios } from '../controladores/authControlador.js';
+import { registrar, iniciarSesion, listarUsuarios } from '../controladores/authcontroladores.js';
 
-const router = express.Router();
+const  creacionuser = express.Router();
 
-router.post('/registrar', registrar);
-router.post('/iniciar-sesion', iniciarSesion);
-router.get('/usuarios', listarUsuarios);  
+creacionuser.post('/registrar', registrar);
+creacionuser.post('/iniciar-sesion', iniciarSesion);
+creacionuser.get('/usuarios', listarUsuarios);  
 
-export default router;
+export default creacionuser;
