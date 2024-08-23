@@ -7,4 +7,14 @@ creacionuser.post('/registrar', registrar);
 creacionuser.post('/iniciar-sesion', iniciarSesion);
 creacionuser.get('/usuarios', listarUsuarios);  
 
+creacionuser.get('/probar', (req, res) => {
+    return res.json({
+        users: [
+            {id: 1, name: 'tomas' },
+            {id: 2, name: 'verdu' },
+            {id: 3, name: 'tincho' },
+        ]
+    })
+})
+
 export default creacionuser;

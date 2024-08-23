@@ -1,11 +1,13 @@
 import express from 'express';
 import creacionuser from './routes/creacionuser.js';
 import { config } from 'dotenv';
+import cors from 'cors';
 import { createPool } from 'mysql2/promise';
 
 config();
 
 const app = express();
+app.use(cors())
 
 
 export const pool = createPool({
