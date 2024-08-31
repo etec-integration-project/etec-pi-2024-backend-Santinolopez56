@@ -5,7 +5,7 @@ services:
     image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=serene-spacedb
+      - MYSQL_DATABASE=f1-storedb
     ports:
       - 3307:3306
 
@@ -17,7 +17,7 @@ services:
       - ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=serene-spacedb
+      - MYSQL_DATABASE=f1-storedb
       - MYSQLDB_HOST=mysqldb
       - MYSQL_USER= root
       - MYSQL_DOCKER_PORT= 3306
