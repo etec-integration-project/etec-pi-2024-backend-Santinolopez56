@@ -15,7 +15,7 @@ export const pool = createPool({
     host: process.env.MYSQLDB_HOST,
     user: 'root',
     password: process.env.MYSQL_ROOT_PASSWORD,
-    port: 3306,
+    // port: 3306,
     database: process.env.MYSQL_DATABASE
 });
 

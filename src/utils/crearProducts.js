@@ -1,15 +1,18 @@
-import { pool } from '../index.js';
-
-export const crearProductos = async () => {
+export async function crearProductos(pool) {
     try {
+        // Inserta múltiples productos en una sola consulta correctamente
         await pool.query(`
-            INSERT INTO products (name, price) VALUES ('Sillon 1', 200);
-            INSERT INTO products (name, price) VALUES ('Sillon 2', 400);
-            INSERT INTO products (name, price) VALUES ('Sillon 3', 500);
-            INSERT INTO products (name, price) VALUES ('Sillon 4', 700);
+            INSERT INTO products (name, price) 
+            VALUES 
+            ('Sillon 1', 200),
+            ('Sillon 2', 400),
+            ('Sillon 3', 500),
+            ('Sillon 4', 700);
         `);
-        console.log('Productos insertados correctamente');
-    } catch (err) {
-        console.error('Error al insertar productos:', err);
+
+        console.log('Productos insertados correctamente.');
+    } catch (error) {
+        console.error('Error al insertar productos:', error);
     }
-};
+}
+
