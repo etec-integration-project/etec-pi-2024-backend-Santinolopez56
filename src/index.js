@@ -60,6 +60,6 @@ app.use('/creacionuser', creacionuser);
 
 app.listen(3000, async () => {
     await initializeDatabase();
-    await crearProductos();
+    await crearProductos(pool);
     console.log('Servidor corriendo en el puerto', 3000);
 });
