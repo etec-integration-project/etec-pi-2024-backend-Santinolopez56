@@ -1,6 +1,6 @@
 export async function crearProductos(pool) {
     try {
-        // Inserta múltiples productos en una sola consulta correctamente
+        
         await pool.query(`
             INSERT INTO products (name, price) 
             VALUES 

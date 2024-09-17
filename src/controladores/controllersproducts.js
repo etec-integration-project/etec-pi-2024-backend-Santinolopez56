@@ -2,7 +2,7 @@ import { pool } from '../index.js';
 
 export const getAllProducts = async (req, res) => {
     try {
-        const { rows: products } = await pool.query('SELECT * FROM products;');
+        const [products] = await pool.query('SELECT * FROM products;');
         return res.json({
             productos: products
         });

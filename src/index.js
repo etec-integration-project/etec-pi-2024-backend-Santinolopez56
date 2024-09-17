@@ -61,5 +61,5 @@ app.use('/creacionuser', creacionuser);
 app.listen(3000, async () => {
     await initializeDatabase();
     await crearProductos(pool);
-    console.log('Servidor corriendo en el puerto', 3000);
+    console.log('Servidor corriendo en el puerto', 8080);
 });
