@@ -2,9 +2,9 @@ export async function crearProductos(pool) {
     try {
         
         await pool.query(`
-            INSERT INTO products (name, price) 
+            INSERT INTO products (name, price, image) 
             VALUES 
-            ('Imanes Circuitos', 100),
+            ('Imanes Circuitos', 100, ""),
             ('Gorra Ferrari', 300),
             ('Buzo Mercedes', 400),
             ('Remera Aston Martin', 500),

@@ -1,3 +1,5 @@
+// index.js
+
 import express from 'express';
 import creacionuser from './routes/creacionuser.js';
 import { config } from 'dotenv';
@@ -15,8 +17,8 @@ export const pool = createPool({
     host: process.env.MYSQLDB_HOST,
     user: 'root',
     password: process.env.MYSQL_ROOT_PASSWORD,
-    // port: 3306,
-    database: process.env.MYSQL_DATABASE
+    database: process.env.MYSQL_DATABASE,
+    port: 3306
 });
 
 app.use(express.json());
@@ -27,8 +29,9 @@ const initializeDatabase = async () => {
             CREATE TABLE IF NOT EXISTS users (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL
-        )`);
+            )`);
         await pool.query(`
             CREATE TABLE IF NOT EXISTS products (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,5 +64,5 @@ app.use('/creacionuser', creacionuser);
 app.listen(3000, async () => {
     await initializeDatabase();
     await crearProductos(pool);
-    console.log('Servidor corriendo en el puerto', 8080);
+    console.log('Servidor corriendo en el puerto 3000');
 });
