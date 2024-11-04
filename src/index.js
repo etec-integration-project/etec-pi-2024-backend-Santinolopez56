@@ -44,11 +44,11 @@ const initializeDatabase = async () => {
     }
 };
 
-app.get('/', (req, res) => {
+app.get('/app/', (req, res) => {
     res.send("Andando");
 });
 
-app.get('/ping', async (req, res) => {
+app.get('/app/ping', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT NOW()');
         res.json({ time: rows[0]['NOW()'] });
@@ -57,9 +57,9 @@ app.get('/ping', async (req, res) => {
     }
 });
 
-app.get('/productos', getAllProducts);
+app.get('/app/productos', getAllProducts);
 
-app.use('/creacionuser', creacionuser);
+app.use('/app/creacionuser', creacionuser);
 
 app.listen(3000, async () => {
     await initializeDatabase();
