@@ -61,7 +61,7 @@ app.get('/app/productos', getAllProducts);
 
 app.use('/app/creacionuser', creacionuser);
 
-app.listen(3000, async () => {
+app.listen(8080, async () => {
     await initializeDatabase();
     await crearProductos(pool);
     console.log('Servidor corriendo en el puerto 3000');
