@@ -36,7 +36,8 @@ const initializeDatabase = async () => {
             CREATE TABLE IF NOT EXISTS products (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
-                price INT NOT NULL  
+                price INT NOT NULL,
+                image VARCHAR(255) NOT NULL
             )`);
         console.log("Las tablas fueron creadas o ya existen.");
     } catch (error) {
