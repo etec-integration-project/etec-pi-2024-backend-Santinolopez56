@@ -3,9 +3,9 @@ import { registrar, iniciarSesion, listarUsuarios } from '../controladores/authc
 
 const  creacionuser = express.Router();
 
-creacionuser.post('/app/registrar', registrar);
-creacionuser.post('/app/iniciar-sesion', iniciarSesion);
-creacionuser.get('/app/usuarios', listarUsuarios);  
+creacionuser.post('/registrar', registrar);
+creacionuser.post('/iniciar-sesion', iniciarSesion);
+creacionuser.get('/usuarios', listarUsuarios);  
 
 creacionuser.get('/app/probar', (req, res) => {
     return res.json({
