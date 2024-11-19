@@ -12,14 +12,14 @@ export const registrar = async (req, res) => {
         const [existingUser] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
 
         if (existingUser.length > 0) {
-            return res.status(409).send('Usuario ya existe');
+            return res.status(409).json({mensaje:'Usuario ya existe'});
         }
 
         const passwordHashed = await bcrypt.hash(password, 8);
         const [results] = await pool.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, passwordHashed]);
-        res.status(201).send('Usuario registrado con éxito');
+        res.status(201).json({mensaje:'Usuario registrado con exito'})
     } catch (error) {
-        res.status(500).send('Error al registrar usuario');
+        res.status(500).json({mensaje:'Error al registrar usuario'});
     }
 };
 
@@ -30,20 +30,20 @@ export const iniciarSesion = async (req, res) => {
         const [rows] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
 
         if (rows.length === 0) {
-            return res.status(404).send('Usuario no encontrado');
+            return res.status(404).json({mensaje:'Usuario no encontrado'});
         }
 
         const usuario = rows[0];
         const esContrasenaValida = await bcrypt.compare(password, usuario.password);
 
         if (!esContrasenaValida) {
-            return res.status(401).send('Contraseña inválida');
+            return res.status(401).json({mensaje:'Contraseña inválida'});
         }
 
         const token = jwt.sign({ id: usuario.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (error) {
-        res.status(500).send('Error al iniciar sesión');
+        res.status(500).json({mensaje:'Error al iniciar sesión'});
     }
 };
 
@@ -52,6 +52,6 @@ export const listarUsuarios = async (req, res) => {
         const [rows] = await pool.query('SELECT id, username FROM users');
         res.status(200).json(rows);
     } catch (error) {
-        res.status(500).send('Error al listar usuarios');
+        res.status(500).json({mensaje:'Error al listar usuarios'});
     }
 };
