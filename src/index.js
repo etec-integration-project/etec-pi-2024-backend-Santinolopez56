@@ -1,5 +1,3 @@
-// index.js
-
 import express from 'express';
 import creacionuser from './routes/creacionuser.js';
 import { config } from 'dotenv';
@@ -30,9 +28,10 @@ const initializeDatabase = async () => {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL
+                password VARCHAR(255) NOT NULL,
                 repeatPassword VARCHAR(255) NOT NULL
             )`);
+
         await pool.query(`
             CREATE TABLE IF NOT EXISTS products (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,6 +39,7 @@ const initializeDatabase = async () => {
                 price INT NOT NULL,
                 image VARCHAR(255) NOT NULL
             )`);
+
         console.log("Las tablas fueron creadas o ya existen.");
     } catch (error) {
         console.error('Error iniciando la base de datos', error);
