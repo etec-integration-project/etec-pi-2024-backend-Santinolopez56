@@ -31,6 +31,7 @@ const initializeDatabase = async () => {
                 username VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL
+                repeatPassword VARCHAR(255) NOT NULL
             )`);
         await pool.query(`
             CREATE TABLE IF NOT EXISTS products (
