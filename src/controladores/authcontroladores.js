@@ -9,17 +9,14 @@ export const registrar = async (req, res) => {
     const { username, password, email } = req.body;
 
     try {
-        // Verificar si el username o email ya existen
         const [existingUser] = await pool.query('SELECT * FROM users WHERE username = ? OR email = ?', [username, email]);
 
         if (existingUser.length > 0) {
             return res.status(409).json({ mensaje: 'Usuario o correo ya existe' });
         }
 
-        // Encriptar la contraseña
         const passwordHashed = await bcrypt.hash(password, 8);
 
-        // Insertar nuevo usuario
         const [results] = await pool.query(
             'INSERT INTO users (username, password, email) VALUES (?, ?, ?)', 
             [username, passwordHashed, email]
