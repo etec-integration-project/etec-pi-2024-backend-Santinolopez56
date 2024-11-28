@@ -81,10 +81,11 @@ export const buyCart = async (req, res) => {
 
     const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [user_id]);
 
-        if (rows.length === 0) {
-            return res.status(404).send('Usuario no encontrado');
-        }
-    const cart = req.body.cart
+    if (rows.length === 0) {
+        return res.status(404).send('Usuario no encontrado');
+    }
+    
+    const cart = JSON.stringify(req.body.cart)
 
     await pool.query('INSERT INTO cart (userID, cartContent) VALUES (?, ?)', [user_id, cart]);
     return res.json({msg:"Compra realizada"});
