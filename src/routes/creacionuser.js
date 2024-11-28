@@ -1,11 +1,12 @@
 import express from 'express';
-import { registrar, iniciarSesion, listarUsuarios } from '../controladores/authcontroladores.js';
+import { registrar, iniciarSesion, listarUsuarios, buyCart } from '../controladores/authcontroladores.js';
 
 const  creacionuser = express.Router();
 
 creacionuser.post('/registrar', registrar);
 creacionuser.post('/iniciar-sesion', iniciarSesion);
 creacionuser.get('/usuarios', listarUsuarios);  
+creacionuser.post('/realizar-compra', buyCart)
 
 creacionuser.get('/app/probar', (req, res) => {
     return res.json({
