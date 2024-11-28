@@ -22,6 +22,10 @@ export const registrar = async (req, res) => {
             [username, passwordHashed, email]
         );
 
+        const token = jwt.sign({ id: usuario.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.cookie('lopez-app', token)
+
         res.status(201).json({ mensaje: 'Usuario registrado con éxito' });
     } catch (error) {
         console.error(error);
@@ -47,7 +51,10 @@ export const iniciarSesion = async (req, res) => {
         }
 
         const token = jwt.sign({ id: usuario.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ token });
+
+        res.cookie('lopez-app', token)
+
+        res.status(200).json({ mensaje: 'Inicio de sesión exitoso' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: 'Error al iniciar sesión' });

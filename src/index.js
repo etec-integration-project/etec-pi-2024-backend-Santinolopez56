@@ -5,11 +5,15 @@ import cors from 'cors';
 import { createPool } from 'mysql2/promise';
 import { crearProductos } from './utils/crearProducts.js';
 import { getAllProducts } from './controladores/controllersproducts.js';
-
+import cookieParser from "cookie-parser";
 config();
 
 const app = express();
-app.use(cors());
+app.use(express.json());
+app.use(cors({
+    origin: '*',
+    credentials: true
+}));
 
 export const pool = createPool({
     host: process.env.MYSQLDB_HOST,
@@ -19,7 +23,6 @@ export const pool = createPool({
     port: 3306
 });
 
-app.use(express.json());
 
 const initializeDatabase = async () => {
     try {
@@ -37,6 +40,13 @@ const initializeDatabase = async () => {
                 name VARCHAR(255) NOT NULL,
                 price INT NOT NULL,
                 image VARCHAR(255) NOT NULL
+            )`);
+
+        await pool.query( `
+            CREATE TABLE IF NOT EXISTS cart (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                userID INT NOT NULL,
+                cartContent VARCHAR(1024) NOT NULL
             )`);
 
         console.log("Las tablas fueron creadas o ya existen.");
