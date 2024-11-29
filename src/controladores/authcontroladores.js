@@ -104,7 +104,7 @@ export const buyCart = async (req, res) => {
         }
 
         // // Validación del carrito
-        // const cart = req.body.cart;
+        const cart = req.body.cart;
         // if (!cart || !Array.isArray(cart) || cart.length === 0) {
         //     return res.status(400).json({ mensaje: 'El carrito está vacío o es inválido' });
         // }
