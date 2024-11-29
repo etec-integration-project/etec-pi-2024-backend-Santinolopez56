@@ -1,4 +1,5 @@
 import { pool } from '../index.js';
+import jwt from 'jsonwebtoken';
 
 export const getAllProducts = async (req, res) => {
     try {
@@ -13,3 +14,17 @@ export const getAllProducts = async (req, res) => {
         });
     }
 };
+
+export const setFavouriteDriver = async (req, res) => {
+    const { piloto } = req.body
+
+    const cookie = req.cookies['lopez-app']
+    if (!cookie) res.staus(403).json({message: "unauthorized"})
+
+    const user_id = jwt.verify(cookie, process.env.JWT_SECRET).id
+
+    await pool.query(
+        'INSERT INTO favoritos (userID, driver) VALUES (?, ?)',
+        [user_id, piloto]
+    )
+}

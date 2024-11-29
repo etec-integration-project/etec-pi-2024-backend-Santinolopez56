@@ -52,7 +52,12 @@ const initializeDatabase = async () => {
                 userID INT NOT NULL,
                 cartContent VARCHAR(1024) NOT NULL
             )`);
-
+            await pool.query( `
+            CREATE TABLE IF NOT EXISTS savoritos (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                userID INT NOT NULL,
+                driver VARCHAR(1024) NOT NULL
+            )`);
         console.log("Las tablas fueron creadas o ya existen.");
     } catch (error) {
         console.error('Error iniciando la base de datos', error);
