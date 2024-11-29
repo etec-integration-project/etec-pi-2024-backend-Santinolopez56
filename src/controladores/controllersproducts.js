@@ -28,5 +28,5 @@ export const setFavouriteDriver = async (req, res) => {
         [user_id, piloto]
     )
 
-    res.staus(201).json({message: "Piloto añadido"})
+    return res.staus(201).json({message: "Piloto añadido"})
 }
