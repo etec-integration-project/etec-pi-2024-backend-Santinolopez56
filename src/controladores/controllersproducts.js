@@ -30,3 +30,28 @@ export const setFavouriteDriver = async (req, res) => {
 
     return res.status(201).json({message: "Piloto añadido"})
 }
+
+export const setOpinion = async (req, res) => {
+    const { productoID, opinion } = req.body; 
+
+    const cookie = req.cookies['lopez-app'];
+    if (!cookie) {
+        return res.status(403).json({ message: "Unauthorized" }); 
+    }
+
+    const user_id = jwt.verify(cookie, process.env.JWT_SECRET).id;
+
+    try {
+        await pool.query(
+            'INSERT INTO opiniones (userID, opinion) VALUES (?, ?, ?)',
+            [user_id,opinion] 
+        );
+
+        return res.status(201).json({ message: "Opinión añadida con éxito" });
+    } catch (error) {
+        console.error("Error al agregar la opinión:", error);
+        return res.status(500).json({ message: "Hubo un error al agregar la opinión" });
+    }
+}
+
+
