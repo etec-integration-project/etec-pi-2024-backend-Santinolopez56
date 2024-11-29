@@ -53,7 +53,7 @@ const initializeDatabase = async () => {
                 cartContent VARCHAR(1024) NOT NULL
             )`);
             await pool.query( `
-            CREATE TABLE IF NOT EXISTS savoritos (
+            CREATE TABLE IF NOT EXISTS favoritos (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 userID INT NOT NULL,
                 driver VARCHAR(1024) NOT NULL
