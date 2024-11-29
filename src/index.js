@@ -63,7 +63,6 @@ const initializeDatabase = async () => {
         CREATE TABLE IF NOT EXISTS opiniones (
             id INT AUTO_INCREMENT PRIMARY KEY,
             userID INT NOT NULL,
-            productoID INT NOT NULL,
             opinion TEXT NOT NULL
         )`);
            
