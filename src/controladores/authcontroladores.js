@@ -103,17 +103,17 @@ export const buyCart = async (req, res) => {
             return res.status(404).json({ mensaje: 'Usuario no encontrado' });
         }
 
-        // Validación del carrito
-        const cart = req.body.cart;
-        if (!cart || !Array.isArray(cart) || cart.length === 0) {
-            return res.status(400).json({ mensaje: 'El carrito está vacío o es inválido' });
-        }
+        // // Validación del carrito
+        // const cart = req.body.cart;
+        // if (!cart || !Array.isArray(cart) || cart.length === 0) {
+        //     return res.status(400).json({ mensaje: 'El carrito está vacío o es inválido' });
+        // }
 
-        for (const item of cart) {
-            if (!item.id || !item.cantidad || typeof item.id !== 'number' || typeof item.cantidad !== 'number') {
-                return res.status(400).json({ mensaje: 'Formato del carrito inválido' });
-            }
-        }
+        // for (const item of cart) {
+        //     if (!item.id || !item.cantidad || typeof item.id !== 'number' || typeof item.cantidad !== 'number') {
+        //         return res.status(400).json({ mensaje: 'Formato del carrito inválido' });
+        //     }
+        // }
 
         // Insertar el carrito en la base de datos
         const cartStringified = JSON.stringify(cart);
