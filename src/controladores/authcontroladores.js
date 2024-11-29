@@ -86,35 +86,46 @@ export const listarUsuarios = async (req, res) => {
 };
 
 export const buyCart = async (req, res) => {
-    const userCookie = req.cookies['lopez-app'];
-
-    if (!userCookie) {
+    // Validación de cookies
+    if (!req.cookies || !req.cookies['lopez-app']) {
         return res.status(403).json({ error: 'No autorizado' });
     }
 
     try {
+        // Validación del token
+        const userCookie = req.cookies['lopez-app'];
         const data = jwt.verify(userCookie, process.env.JWT_SECRET);
         const user_id = data.id;
 
+        // Validación de usuario
         const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [user_id]);
-
         if (rows.length === 0) {
             return res.status(404).json({ mensaje: 'Usuario no encontrado' });
         }
 
+        // Validación del carrito
         const cart = req.body.cart;
-
         if (!cart || !Array.isArray(cart) || cart.length === 0) {
             return res.status(400).json({ mensaje: 'El carrito está vacío o es inválido' });
         }
 
+        for (const item of cart) {
+            if (!item.id || !item.cantidad || typeof item.id !== 'number' || typeof item.cantidad !== 'number') {
+                return res.status(400).json({ mensaje: 'Formato del carrito inválido' });
+            }
+        }
+
+        // Insertar el carrito en la base de datos
         const cartStringified = JSON.stringify(cart);
+        const [result] = await pool.query('INSERT INTO cart (userID, cartContent) VALUES (?, ?)', [user_id, cartStringified]);
 
-        await pool.query('INSERT INTO cart (userID, cartContent) VALUES (?, ?)', [user_id, cartStringified]);
-
-        return res.json({ mensaje: 'Compra realizada' });
+        return res.json({ 
+            mensaje: 'Compra realizada', 
+            compraId: result.insertId 
+        });
     } catch (error) {
-        console.error(error);
+        console.error('Error en buyCart:', error);
         res.status(500).json({ mensaje: 'Error al procesar la compra' });
     }
 };
+
