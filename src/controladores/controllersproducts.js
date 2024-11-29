@@ -43,7 +43,7 @@ export const setOpinion = async (req, res) => {
 
     try {
         await pool.query(
-            'INSERT INTO opiniones (userID, opinion) VALUES (?, ?, ?)',
+            'INSERT INTO opiniones (userID, opinion) VALUES (?, ?)',
             [user_id,opinion] 
         );
 
