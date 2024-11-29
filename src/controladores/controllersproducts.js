@@ -32,7 +32,7 @@ export const setFavouriteDriver = async (req, res) => {
 }
 
 export const setOpinion = async (req, res) => {
-    const { productoID, opinion } = req.body; 
+    const { opinion } = req.body; 
 
     const cookie = req.cookies['lopez-app'];
     if (!cookie) {
