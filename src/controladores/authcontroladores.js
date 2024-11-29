@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 
+
 config();
 
 export const registrar = async (req, res) => {

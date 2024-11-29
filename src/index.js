@@ -6,9 +6,13 @@ import { createPool } from 'mysql2/promise';
 import { crearProductos } from './utils/crearProducts.js';
 import { getAllProducts } from './controladores/controllersproducts.js';
 import cookieParser from "cookie-parser";
+
 config();
 
 const app = express();
+
+app.use(cookieParser());
+
 app.use(express.json());
 app.use(cors({
     origin: '*',

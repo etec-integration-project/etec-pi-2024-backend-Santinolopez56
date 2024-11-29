@@ -6,7 +6,7 @@ const  creacionuser = express.Router();
 creacionuser.post('/registrar', registrar);
 creacionuser.post('/iniciar-sesion', iniciarSesion);
 creacionuser.get('/usuarios', listarUsuarios);  
-creacionuser.post('/realizar-compra', buyCart)
+creacionuser.post('/realizarcompra', buyCart)
 
 creacionuser.get('/app/probar', (req, res) => {
     return res.json({
