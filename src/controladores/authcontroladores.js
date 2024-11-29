@@ -29,7 +29,7 @@ export const registrar = async (req, res) => {
         const token = jwt.sign(
             { id: results.insertId },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+        
         );
 
         res.cookie('lopez-app', token);
@@ -64,7 +64,6 @@ export const iniciarSesion = async (req, res) => {
         const token = jwt.sign(
             { id: usuario.id },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
         );
 
         res.cookie('lopez-app', token);
