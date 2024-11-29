@@ -24,7 +24,9 @@ export const setFavouriteDriver = async (req, res) => {
     const user_id = jwt.verify(cookie, process.env.JWT_SECRET).id
 
     await pool.query(
-        'INSERT INTO favoritos (userID, driver) VALUES (?,)',
+        'INSERT INTO favoritos (userID, driver) VALUES (?,?)',
         [user_id, piloto]
     )
+
+    res.staus(201).json({message: "Piloto añadido"})
 }
